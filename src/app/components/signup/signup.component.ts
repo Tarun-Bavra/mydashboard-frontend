@@ -7,20 +7,20 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, CommonModule], // ✅ Added CommonModule for *ngIf
+  imports: [FormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  fullName: string = '';
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
-  successMessage: string = '';
+  fullName = '';
+  email = '';
+  password = '';
+  errorMessage = '';
+  successMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
+  onSubmit(): void {
     const signupData = {
       name: this.fullName,
       email: this.email,
