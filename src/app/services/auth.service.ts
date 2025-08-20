@@ -29,4 +29,8 @@ export class AuthService {
   signup(data: SignupRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+  }
 }

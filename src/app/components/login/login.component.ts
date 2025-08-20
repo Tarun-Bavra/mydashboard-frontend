@@ -22,9 +22,12 @@ export class LoginComponent {
     const loginData = { email: this.email, password: this.password };
 
     this.authService.login(loginData).subscribe({
-      next: () => {
+      next: (response) => {
+        // ✅ store token securely (localStorage for now)
+        localStorage.setItem('authToken', response.token);
+
         console.log('Login successful:', this.email);
-        this.router.navigate(['/dashboard']); // ✅ redirect after login
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Login failed';
