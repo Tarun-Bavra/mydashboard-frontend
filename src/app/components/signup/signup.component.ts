@@ -20,6 +20,10 @@ export class SignupComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
   onSubmit(): void {
     const signupData = {
       fullName: this.fullName,

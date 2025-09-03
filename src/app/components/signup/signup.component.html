@@ -39,24 +39,22 @@
 
       <p class="login-link">
         Already have an account?
-        <a routerLink="/login">Login</a>
+        <a (click)="navigateToLogin()">Login</a>
       </p>
 
-      <!-- ✅ Success message -->
-      <div
-        *ngIf="successMessage"
-        style="color: green; text-align: center; margin-top: 10px"
-      >
+      <!-- ✅ Success message using the new @if syntax -->
+      @if (successMessage) {
+      <div style="color: green; text-align: center; margin-top: 10px">
         {{ successMessage }}
       </div>
+      }
 
-      <!-- ❌ Error message -->
-      <div
-        *ngIf="errorMessage"
-        style="color: red; text-align: center; margin-top: 10px"
-      >
+      <!-- ❌ Error message using the new @if syntax -->
+      @if (errorMessage) {
+      <div style="color: red; text-align: center; margin-top: 10px">
         {{ errorMessage }}
       </div>
+      }
     </form>
   </div>
 </div>
