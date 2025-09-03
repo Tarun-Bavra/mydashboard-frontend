@@ -22,7 +22,7 @@ export class SignupComponent {
 
   onSubmit(): void {
     const signupData = {
-      name: this.fullName,
+      fullName: this.fullName,
       email: this.email,
       password: this.password,
     };
