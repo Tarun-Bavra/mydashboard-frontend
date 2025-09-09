@@ -34,3 +34,8 @@ export class AuthService {
     localStorage.removeItem('authToken');
   }
 }
+
+//
+// C:\Python312\Scripts\
+
+// C:\Python312\
