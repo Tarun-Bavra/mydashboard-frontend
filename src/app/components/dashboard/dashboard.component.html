@@ -1,10 +1,52 @@
 <div class="dashboard-wrapper">
-  <div class="dashboard-box">
+  <header class="dashboard-header">
     <h2>Welcome to Your Dashboard</h2>
-    <p class="subtitle">You are successfully logged in.</p>
+    <p class="subtitle">{{ subtitle }}</p>
+  </header>
 
-    <div class="dashboard-actions">
-      <button class="btn-logout" (click)="logout()">Logout</button>
+  <section class="dashboard-cards">
+    <!-- Temperature -->
+    <div class="card">
+      <h3>Temperature</h3>
+      <div class="chart-placeholder chart-full">
+        <canvas
+          baseChart
+          [data]="lineChartData"
+          [options]="lineChartOptions"
+          type="line"
+        ></canvas>
+      </div>
     </div>
+
+    <!-- Humidity -->
+    <div class="card">
+      <h3>Humidity</h3>
+      <div class="chart-placeholder chart-full">
+        <canvas
+          baseChart
+          [data]="pieChartData"
+          [options]="pieChartOptions"
+          type="pie"
+        ></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- History / Info -->
+  <section class="dashboard-history">
+    <h3>Recent Telemetry</h3>
+    <div class="table-placeholder">
+      (Charts above update with latest readings. Use demo controls to simulate.)
+    </div>
+  </section>
+
+  <!-- Demo Controls -->
+  <div class="controls">
+    <!-- <button class="btn" (click)="addReading(22.5, 55)">➕ Add Sample</button> -->
+  </div>
+
+  <!-- Logout -->
+  <div class="dashboard-actions">
+    <button class="btn-logout" (click)="logout()">Logout</button>
   </div>
 </div>

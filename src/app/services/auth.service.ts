@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-// ✅ Move interfaces outside or into a separate `auth.model.ts`
 export interface LoginRequest {
   email: string;
   password: string;
@@ -14,16 +14,38 @@ export interface SignupRequest {
   password: string;
 }
 
+export interface User {
+  fullName: string;
+  email: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth'; // ✅ adjust for backend
+  private baseUrl = 'http://localhost:8080/api/auth';
 
-  constructor(private http: HttpClient) {}
+  // ✅ BehaviorSubject stores current user state
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    // ✅ Restore from localStorage if available
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) {
+      this.currentUserSubject.next(JSON.parse(savedUser));
+    }
+  }
 
   login(data: LoginRequest): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, data);
+    return this.http.post<User>(`${this.baseUrl}/login`, data).pipe(
+      tap((user) => {
+        // ✅ Save user in BehaviorSubject + localStorage
+        this.currentUserSubject.next(user);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('authToken', 'dummyToken'); // replace with real JWT
+      })
+    );
   }
 
   signup(data: SignupRequest): Observable<any> {
@@ -32,10 +54,12 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+  }
+
+  // ✅ Helper: read current user snapshot (sync)
+  getCurrentUser(): User | null {
+    return this.currentUserSubject.value;
   }
 }
-
-//
-// C:\Python312\Scripts\
-
-// C:\Python312\

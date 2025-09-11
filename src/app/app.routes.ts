@@ -1,16 +1,29 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { authGuard } from './guards/auth.guard'; // ✅ import guard
+import { authGuard } from './guards/auth.guard'; // ✅ keep guard import
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./components/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
+  },
+  {
+    path: 'signup',
+    loadComponent: () =>
+      import('./components/signup/signup.component').then(
+        (m) => m.SignupComponent
+      ),
+  },
   {
     path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [authGuard],
-  }, // ✅ protected
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
+    canActivate: [authGuard], // ✅ protected route
+  },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }, // ✅ fallback for unknown routes
 ];

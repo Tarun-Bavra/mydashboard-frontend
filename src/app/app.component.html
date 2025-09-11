@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<nav class="topbar">
+  <div class="brand">ThingsBoard-lite</div>
+
+  <div class="spacer"></div>
+
+  <div class="user-actions">
+    <span class="username" *ngIf="userName">{{ userName }}</span>
+    <button class="btn-logout" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<main class="main-bg">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<footer class="footer">© {{ 2025 }} — Procubed Innovations Pvt Ltd</footer>
