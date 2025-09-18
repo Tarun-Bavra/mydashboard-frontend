@@ -1,0 +1,10 @@
+<div class="toast-container">
+  <div
+    *ngFor="let notif of notifications"
+    class="toast"
+    [ngClass]="notif.type.toLowerCase()"
+  >
+    <strong>{{ notif.type }}</strong
+    >: {{ notif.message }}
+  </div>
+</div>

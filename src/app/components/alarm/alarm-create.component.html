@@ -1,0 +1,70 @@
+<div class="alarm-create-wrapper">
+  <h2>Create New Alarm</h2>
+
+  <form [formGroup]="alarmForm" (ngSubmit)="createAlarm()" class="alarm-form">
+    <!-- Device ID -->
+    <div class="form-group">
+      <label for="deviceId">Device ID</label>
+      <input
+        type="text"
+        id="deviceId"
+        formControlName="deviceId"
+        placeholder="Enter device ID"
+      />
+      <div
+        class="error"
+        *ngIf="
+          alarmForm.get('deviceId')?.invalid &&
+          alarmForm.get('deviceId')?.touched
+        "
+      >
+        Device ID is required.
+      </div>
+    </div>
+
+    <!-- Severity -->
+    <div class="form-group">
+      <label for="severity">Severity</label>
+      <select id="severity" formControlName="severity">
+        <option
+          *ngFor="let level of ['CRITICAL', 'WARNING', 'INFO']"
+          [value]="level"
+        >
+          {{ level }}
+        </option>
+      </select>
+      <div
+        class="error"
+        *ngIf="
+          alarmForm.get('severity')?.invalid &&
+          alarmForm.get('severity')?.touched
+        "
+      >
+        Severity is required.
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea
+        id="message"
+        formControlName="message"
+        placeholder="Enter alarm message"
+      ></textarea>
+      <div
+        class="error"
+        *ngIf="
+          alarmForm.get('message')?.invalid && alarmForm.get('message')?.touched
+        "
+      >
+        Message is required and must be at least 5 characters.
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" [disabled]="alarmForm.invalid" class="btn-submit">
+      Create Alarm
+    </button>
+  </form>
+</div>

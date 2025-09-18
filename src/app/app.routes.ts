@@ -1,5 +1,6 @@
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard'; // ✅ keep guard import
+import { authGuard } from './guards/auth.guard'; // ✅ guard import
 
 export const routes: Routes = [
   {
@@ -24,6 +25,29 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard], // ✅ protected route
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' }, // ✅ fallback for unknown routes
+  {
+    path: 'alarms',
+    loadComponent: () =>
+      import('./components/alarm/alarm-list.component').then(
+        (m) => m.AlarmListComponent
+      ),
+    canActivate: [authGuard], // ✅ also protected
+  },
+  {
+    path: 'alarms/create', // ✅ new route for creating alarms
+    loadComponent: () =>
+      import('./components/alarm/alarm-create.component').then(
+        (m) => m.AlarmCreateComponent
+      ),
+    canActivate: [authGuard], // ✅ protected
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: 'login', // ✅ fallback for unknown routes
+  },
 ];

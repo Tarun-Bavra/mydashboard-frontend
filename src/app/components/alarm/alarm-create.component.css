@@ -1,0 +1,95 @@
+/* Wrapper */
+.alarm-create-wrapper {
+  max-width: 480px;
+  margin: 20px auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.alarm-create-wrapper h2 {
+  text-align: center;
+  color: #1e3a8a; /* dark blue */
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Form groups */
+.alarm-form .form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.alarm-form label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #1f2937; /* dark gray */
+}
+
+/* Inputs & Textarea */
+.alarm-form input,
+.alarm-form select,
+.alarm-form textarea {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db; /* light gray */
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.alarm-form input:focus,
+.alarm-form select:focus,
+.alarm-form textarea:focus {
+  border-color: #3b82f6; /* blue focus */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Textarea resize */
+.alarm-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Error messages */
+.alarm-form .error {
+  color: #ef4444; /* red */
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Submit button */
+.alarm-form .btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #3b82f6; /* blue */
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.alarm-form .btn-submit:disabled {
+  background-color: #9ca3af; /* gray when disabled */
+  cursor: not-allowed;
+}
+
+.alarm-form .btn-submit:hover:not(:disabled) {
+  background-color: #2563eb; /* darker blue on hover */
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .alarm-create-wrapper {
+    padding: 16px;
+    margin: 12px;
+  }
+}

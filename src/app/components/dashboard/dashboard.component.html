@@ -1,4 +1,7 @@
 <div class="dashboard-wrapper">
+  <!-- Notification Toasts -->
+  <app-notification-toast></app-notification-toast>
+
   <header class="dashboard-header">
     <h2>Welcome to Your Dashboard</h2>
     <p class="subtitle">{{ subtitle }}</p>
@@ -32,21 +35,27 @@
     </div>
   </section>
 
+  <!-- Alarms Section -->
+  <section class="dashboard-alarms">
+    <div class="alarms-header">
+      <h3>Active Alarms</h3>
+      <button class="btn" (click)="goToCreateAlarm()">+ Create Alarm</button>
+    </div>
+
+    <app-alarm-list></app-alarm-list>
+  </section>
+
   <!-- History / Info -->
   <section class="dashboard-history">
     <h3>Recent Telemetry</h3>
     <div class="table-placeholder">
-      (Charts above update with latest readings. Use demo controls to simulate.)
+      (Charts above update with latest readings.)
     </div>
   </section>
 
-  <!-- Demo Controls -->
-  <div class="controls">
-    <!-- <button class="btn" (click)="addReading(22.5, 55)">➕ Add Sample</button> -->
-  </div>
-
-  <!-- Logout -->
+  <!-- Actions -->
   <div class="dashboard-actions">
-    <button class="btn-logout" (click)="logout()">Logout</button>
+    <button class="btn" (click)="goToAlarms()">View Alarms</button>
+    <!-- <button class="btn-logout" (click)="logout()">Logout</button> -->
   </div>
 </div>

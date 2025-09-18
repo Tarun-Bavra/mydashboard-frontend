@@ -1,0 +1,44 @@
+<div class="alarm-list-container">
+  <h2>Alarms</h2>
+
+  <!-- Stream binding with async pipe -->
+  @if (alarms$ | async; as alarms) { @if (alarms.length > 0) {
+  <table class="alarm-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Device</th>
+        <th>Type</th>
+        <th>Severity</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (alarm of alarms; track alarm.id) {
+      <tr>
+        <td>{{ alarm.id }}</td>
+        <td>{{ alarm.deviceName }}</td>
+        <td>{{ alarm.type }}</td>
+        <td>{{ alarm.severity }}</td>
+        <td>{{ alarm.status }}</td>
+        <td>{{ alarm.createdAt | date : "short" }}</td>
+        <td>
+          @if (alarm.status === 'ACTIVE') {
+          <button (click)="acknowledge(alarm)">Acknowledge</button>
+          <button (click)="resolve(alarm)">Resolve</button>
+          } @else if (alarm.status === 'ACKNOWLEDGED') {
+          <button (click)="resolve(alarm)">Resolve</button>
+          } @else {
+          <span>—</span>
+          }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  } @else {
+  <p>No alarms found.</p>
+  } }
+</div>
